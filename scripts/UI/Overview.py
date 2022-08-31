@@ -266,7 +266,7 @@ class Ui_Overview(object):
             self.addButtons()
             self.setStats()
 
-    #Graafin tekoon?
+    #Graafin teko
     def setChart(self):
         QApplication.processEvents()
         itemName = self.itemDropMenu.currentText()
