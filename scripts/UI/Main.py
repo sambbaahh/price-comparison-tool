@@ -203,7 +203,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     MainWindow.setFixedSize(890, 580)
-    # location_on_the_screen(MainWindow)
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.setWindowTitle("Main Menu")
