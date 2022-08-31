@@ -14,7 +14,6 @@ Kärkkäinen - https://www.karkkainen.com
 The app was made using Python and MySQL.
 
 
-
 ## Install and run
 We created and tested the application using the following technologies:  
 
@@ -30,11 +29,12 @@ https://www.geeksforgeeks.org/how-to-install-pip-on-windows/
 After installing PIP, open the command prompt and install the following libraries using these commands:
 
 pip install beautifulsoup4  
+pip install requests  
 pip install pyqt5  
 pip install mysql-connector-python  
-pip install matplotlib  
+pip install matplotlib   
 
-BeautifulSoup4 is used for fetching the prices from the shops.  
+BeautifulSoup4 & requests are used for fetching the prices from the shops.  
 PyQt5 is used for drawing the interface.  
 MySQL-connector is used to access the database.  
 Matplotlib is used for drawing the graph.  
@@ -51,13 +51,6 @@ Download and install MariaDB. Set the user to 'root' and the password to 'admin'
 
 
 ## How to Use
-
-
-
-
-
-
-
 
 
 
