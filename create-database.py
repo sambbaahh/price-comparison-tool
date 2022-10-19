@@ -1,5 +1,6 @@
 import mysql.connector
 
+#Method drops the database if it exists before and creates a new one
 def createDatabase():
     try:
         connection = mysql.connector.connect(
@@ -13,6 +14,7 @@ def createDatabase():
             connection.close()
             cursor.close()
 
+#Adding the shops to the database
 def createShops():
     try:
         connection = mysql.connector.connect(

@@ -19,7 +19,7 @@ from Methods.Database import Database
 
 
 class Ui_AddShopForItem(object):
-    #Käyttöliittymän setuppaus
+    #UI setup
     def setupUi(self, AddShop):
         AddShop.setObjectName("AddItem")
         AddShop.resize(890, 580)
@@ -76,7 +76,7 @@ class Ui_AddShopForItem(object):
         
 
 
-    #Tavaroiden nimien haku tietokannasta
+    #Finding the items' names from the database
     def setItems(self):
         itemNameList = Database.getItemNames()
         self.itemDropMenu.clear()
@@ -97,7 +97,7 @@ class Ui_AddShopForItem(object):
             self.itemDropMenu.addItem(row)
 
 
-    #Kauppojen haku tietokannasta
+    #Finding the shops from the database
     def setShops(self):
         object = Database
         QApplication.processEvents()
@@ -116,18 +116,18 @@ class Ui_AddShopForItem(object):
             else:
                 self.shopDropMenu.addItem(row[0])
 
-    #Tyhjentää tekstikentät ja näyttää viestin tavaran lisäämisestä
+    #Clears the inputs and shows a message that the shop has been added
     def clearInputs(self):
         self.inputUrl.clear()
         self.itemDropMenu.setCurrentIndex(-1)
         self.shopDropMenu.clear()
         self.Mbox("!", "Shop added.", 0)
 
-    #Metodi ilmoitusikkunoiden tekoon
+    #Method for the message boxes
     def Mbox(self, title, text, style):
             return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-    #Metodilla lisätään tavaralle kauppa
+    #Adding a shop for an item
     def addShopForItem(self):
             databaseObject = Database
             QApplication.processEvents()

@@ -22,7 +22,7 @@ from Methods.GetPrices import GetPrices
 from Methods.Database import Database
 
 class Ui_AddItem(object):
-        #Käyttöliittymän setuppaus
+        #UI setup
         def setupUi(self, AddItem):
                 AddItem.setObjectName("AddItem")
                 AddItem.resize(890, 580)
@@ -78,7 +78,7 @@ class Ui_AddItem(object):
                 # Set shops to shopDropMenu
                 self.setShops()
 
-        #Kauppojen haku tietokannasta
+        #Finding the shops from the database
         def setShops(self):
                 object = Database
                 shopList = object.findShops()
@@ -89,11 +89,11 @@ class Ui_AddItem(object):
                 for row in shopList:
                         self.ShopDropMenu.addItem(row[0])
 
-        #Metodi ilmoitusikkunoiden tekoon
+        #Method for the message boxes
         def Mbox(self, title, text, style):
                 return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-        #Tyhjentää tekstikentät ja näyttää viestin tavaran lisäämisestä
+        #Clears the inputs and shows a message that the item has been added
         def clearInputs(self):
                 self.InputUrl.clear()
                 self.InputItemName.clear()
@@ -102,7 +102,7 @@ class Ui_AddItem(object):
                 
 
 
-        #Tietokantaan lisäys
+        #Method for adding the item 
         def AddItemClick(self):
 
                 QApplication.processEvents()
@@ -112,30 +112,30 @@ class Ui_AddItem(object):
                 shop = self.ShopDropMenu.currentText()
                 date = datetime.today().strftime('%Y-%m-%d')
 
-                #Näyttää viestilaatikon jos tavaran nimi on jätetty tyhjäksi
+                #Shows an error if the item's name has been left empty
                 if itemName == '':
                         self.Mbox("Warning", "Item name not set!", 0)
                 
-                #Näyttää viestilaatikon jos tavaran nimessä on vain välejä tai näkymättömiä merkkejä
+                #Shows an error if the item's name only has spaces or invisible symbols
                 elif itemName.isspace() == True:
                         self.Mbox("Warning", "Item name not set!", 0)
                 
-                #Tarkistaa mikä kauppa on valittuna ja onko tavaran URL-osoite sama mikä kaupalla
+                #Checks what shop has been selected and if it matches with the shops URL
                 elif shop == "Jimms":
                         
-                        #Näyttää viestilaatikon jos URL-osoite on väärä
+                        #Shows an error if the URL is wrong
                         if not (URL.startswith("https://www.jimms.fi/")):
                                 self.Mbox("Warning","INVALID URL!", 0)
                         
-                        #Jos tavaran nimi ja URL-osoite ok, yritetään lisätä tavara tietokantaan
+                        #Tries adding the item to the database
                         else:
                                 itemCheck = Database.checkItemNames(itemName)
                                 
-                                #Näyttää viestilaatikon jos samanniminen tavara löytyy tietokannasta
+                                #Shows an error if an item with the same name exists
                                 if ('TRUE',) in itemCheck:
                                         self.Mbox("Warning","Item exists in database",0)
 
-                                #Jos tavaraa ei löydy, lisätään se tietokantaan
+                                #If the item is not found in the database before, it gets added
                                 else:
                                         time.sleep(0.5)
                                         priceJimms = GetPrices.getJimmsPrice(URL)
@@ -144,7 +144,7 @@ class Ui_AddItem(object):
                                         Database.addItemPrice(Database, priceJimms, date, itemName, shop)
                                         self.clearInputs()
 
-
+                
                 elif shop == "Verkkokauppa.com":
 
                         if not (URL.startswith("https://www.verkkokauppa.com/")):
