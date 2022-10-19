@@ -22,7 +22,7 @@ from Methods.Database import Database
 
 class Ui_MainWindow(object):
 
-    #Metodit ikkunoiden aukomiseen
+    #Methods for the new windows
     def openWindowAddItem(self):
         self.window = QtWidgets.QMainWindow()
         self.window.setFixedSize(890, 580)
@@ -31,7 +31,6 @@ class Ui_MainWindow(object):
         self.window.setWindowTitle("Add Item")
         self.window.show()
 
-    #Metodit ikkunoiden aukomiseen
     def openWindowAddShopForItem(self):
         self.window = QtWidgets.QMainWindow()
         self.window.setFixedSize(890, 580)
@@ -40,7 +39,6 @@ class Ui_MainWindow(object):
         self.window.setWindowTitle("Add Shop for Item")
         self.window.show()
 
-    #Metodit ikkunoiden aukomiseen
     def openWindowOverview(self):
         self.window = QtWidgets.QMainWindow()
         self.window.setFixedSize(1056, 800)
@@ -49,7 +47,7 @@ class Ui_MainWindow(object):
         self.window.setWindowTitle("Overview")
         self.window.show()
 
-    #Käyttöliittymän setuppaus
+    #UI setup
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(890, 580)
@@ -130,11 +128,11 @@ class Ui_MainWindow(object):
         self.btnOverview.clicked.connect(self.openWindowOverview)
         self.btnExit.clicked.connect(sys.exit)
 
-    #Metodi ilmoitusikkunoiden tekoon
+    #Method for the message boxes
     def Mbox(self, title, text, style):
             return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-    #Metodi tietokannan päivittämiseen
+    #Method for refreshing the database
     def refreshPrices(self):
         try:
             databaseObject = Database

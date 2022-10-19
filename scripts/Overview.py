@@ -20,6 +20,7 @@ from Methods.Database import Database
 
 class Ui_Overview(object):
 
+    #UI setup
     def setupUi(self, Overview):
         Overview.setObjectName("Overview")
         Overview.resize(1056, 800)
@@ -143,7 +144,7 @@ class Ui_Overview(object):
         self.lblAlltimeHigh.setText(_translate("Overview", "All Time Highest price:"))
 
 
-    #Tavaroiden nimien haku tietokannasta
+    #Finding the items' names from the database
     def setItems(self):
         itemNameList = Database.getItemNames()
         self.itemDropMenu.clear()
@@ -162,7 +163,7 @@ class Ui_Overview(object):
         for row in correctItemList:
             self.itemDropMenu.addItem(row)
 
-    #Metodi datan printtaamiseen
+    #Method for printing the data
     def printData(self):
         if self.itemDropMenu.currentText() == '':
             self.Mbox("Error","Item not selected", 0)
@@ -173,10 +174,10 @@ class Ui_Overview(object):
             self.setStats()
             
 
-    #Metodilla lisätään tavaralle napit joista voi mennä tavaran sivuille tai poistaa sen
+    #Method adds buttons which allow visiting the item's shop or deleting the shop.
     def addButtons(self):
         
-        #Avaa selaimen annetulla URL-osoitteella
+        #Method opens the browser with the given URL
         def openBrowser(url):
             webbrowser.open(url)
         
@@ -214,7 +215,7 @@ class Ui_Overview(object):
             btnY += 65 
             shopIndex += 1
 
-    #Metodi lisää tavaran hintatiedot
+    #Method adds the item's price information
     def setStats(self):
         try:
             QApplication.processEvents()
@@ -254,11 +255,11 @@ class Ui_Overview(object):
             self.lblAlltimeHighOutput.setText(" ")
 
 
-    #Metodi ilmoitusikkunoiden tekoon
+    #Method for the message boxes
     def Mbox(self, title, text, style):
             return ctypes.windll.user32.MessageBoxW(0, text, title, style)
         
-    #Metodilla poistetaan tavaralta kauppa
+    #Method removes a shop from an item
     def deleteButtonAction(self, itemName, shop):
             Database.deleteItemPrices(Database, itemName, shop[0])
             Database.deleteItem(Database, itemName, shop[0])
@@ -266,7 +267,7 @@ class Ui_Overview(object):
             self.addButtons()
             self.setStats()
 
-    #Graafin teko
+    #Making the graph
     def setChart(self):
         QApplication.processEvents()
         itemName = self.itemDropMenu.currentText()
